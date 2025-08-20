@@ -55,9 +55,9 @@ function useUpload() {
 		setFileId(fileObj.$id);
 		setFileUrl(fileView);
 
-		const result = await processPdf(file, fileObj.name);
+		const result = await processPdf(fileObj.name, fileObj.$id);
 		console.log(result);
-		// setOutput(result);
+		setOutput(result);
 
 		//free pro limitations
 	};
