@@ -3,14 +3,10 @@
 import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
 
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { PineconeStore } from "@langchain/pinecone";
-import PineconeClient from "@/lib/pinecone";
 
-// import { FaissStore } from "@langchain/community/vectorstores/faiss";
-// import path from "path";
+import { generateEmbeddingsInPineStore } from "@/lib/langchain";
 
-export async function processPdf(file) {
+export async function processPdf(file, docId) {
 	if (!file) throw new Error("No file URL provided");
 
 	// 1. Load PDF directly from file path/url
@@ -26,25 +22,10 @@ export async function processPdf(file) {
 	});
 	const splitDocs = await splitter.splitDocuments(docs);
 
-	console.log("chunks is", splitDocs);
+	// console.log("chunks is", splitDocs);
+	const results = await generateEmbeddingsInPineStore(splitDocs, docId);
 
-	// 3. Create embeddings
-	const embeddings = new OpenAIEmbeddings({
-		model: "text-embedding-3-small",
-	});
-
-	const pineconeIndex = PineconeClient.Index(process.env.PINECONE_INDEX);
-
-	// 5. Store in Pinecone
-	const vectorStore = await PineconeStore.fromDocuments(splitDocs, embeddings, {
-		pineconeIndex: pineconeIndex,
-		namespace: "pdf-uploads", // optional namespace for organization
-	});
-
-	console.log("indexing done");
-
-	// // Example: search
-	// const results = await vectorStore.similaritySearch("summary of pdf", 2);
+	console.log("indexing done", results);
 
 	return { completed: true };
 }
