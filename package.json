@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.17",
+    "@ai-sdk/react": "^2.0.19",
     "@clerk/nextjs": "^6.31.2",
     "@langchain/community": "^0.3.53",
     "@langchain/core": "^0.3.72",
@@ -16,10 +18,13 @@
     "@langchain/pinecone": "^0.2.0",
     "@pinecone-database/pinecone": "^5.1.2",
     "@radix-ui/react-slot": "^1.2.3",
+    "@react-pdf/renderer": "^4.3.0",
+    "ai": "^5.0.19",
     "appwrite": "^18.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "firebase": "^12.1.0",
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.540.0",
     "next": "15.4.6",
     "node-appwrite": "^17.0.0",
@@ -27,6 +32,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-dropzone": "^14.3.8",
+    "react-pdf": "^10.1.0",
     "short-unique-id": "^5.3.2",
     "tailwind-merge": "^3.3.1"
   },

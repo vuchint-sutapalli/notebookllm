@@ -1,6 +1,7 @@
 "use client"; // 👈 Add this at the top
 import useUpload from "@/hooks/useUpload";
-import React from "react";
+import React, { useState } from "react";
+import ChatBot from "../../chatbot";
 
 function ChatToFilePage({ params }) {
 	const { output } = useUpload();
@@ -10,13 +11,9 @@ function ChatToFilePage({ params }) {
 	return (
 		<div>
 			{id}
-			{output && (
-				<div className="mt-4">
-					<p>Chunks created: {output.chunks}</p>
-				</div>
-			)}
+			<ChatBot />
 		</div>
-	); // ✅ Works fine in client
+	);
 }
 
 export default ChatToFilePage;
