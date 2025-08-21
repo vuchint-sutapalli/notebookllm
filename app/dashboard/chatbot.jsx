@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Loader2, Paperclip, Mic } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ChatBot() {
+export default function ChatBot({ fileName }) {
 	const { messages, sendMessage, status } = useChat({
 		transport: new DefaultChatTransport({
 			api: "/api/chat",
@@ -81,7 +81,16 @@ export default function ChatBot() {
 				onSubmit={(e) => {
 					e.preventDefault();
 					if (input.trim()) {
-						sendMessage({ text: input });
+						sendMessage(
+							{
+								text: input,
+							},
+							{
+								body: {
+									namespace: fileName,
+								},
+							}
+						);
 						setInput("");
 					}
 				}}
